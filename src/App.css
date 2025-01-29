@@ -1,0 +1,111 @@
+:root {
+    /* Colors */
+    --blackpure: #000000;
+    --pale-black: #464646;
+    --darkgrey: #585858;
+    --grey: #a1a1a1;
+    --grey-text: #afafaf;
+    --grey-shadow: rgba(34, 60, 80, 0.2);
+    --lightgrey: #eeedee;
+    --white: #ffffff;
+    --green-border: #33c481;
+    --pale-green-border: #81bea2;
+    --green-background: #33c481;
+    --green-shadow: rgba(24, 92, 55, 1);
+
+    /* Light mode */
+    --page-bg: var(--white);
+    --text-color: var(--blackpure);
+    --task-text-color: var(--white);
+    --input-bg: var(--white);
+    --button-bg: var(--white);
+    --wrappers-bg: var(--lightgrey);
+    --wrappers-shadow: var(--grey-shadow);
+    --task-bg: var(--white);
+    --task-button-bg: var(--white);
+    --timer-buttons-text-color: var(--blackpure);
+    --disabled-timer-buttons-text-color: var(--grey-text);
+}
+
+.dark {
+    /* Dark mode */
+    --page-bg: #464646;
+    --wrappers-bg: #646464;
+    --wrappers-shadow: rgba(49, 49, 49, 0.5);
+    --button-bg: var(--pale-black);
+    --task-button-bg: var(--grey);
+    --task-text-color: var(--blackpure);
+    --task-bg: var(--pale-black);
+    --input-bg: var(--pale-black);
+    --green-shadow: rgba(0, 0, 0, 1);
+    --timer-buttons-text-color: var(--lightgrey);
+}
+
+body {
+    background-color: var(--page-bg);
+    transition-property: color, background-color, box-shadow;
+    transition-duration: 300ms;
+}
+
+.main-content {
+    max-width: 1440px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.service-name {
+    font-size: 20px;
+    color: var(--text-color);
+    text-transform: uppercase;
+    font-style: italic;
+    letter-spacing: 5px;
+    background-color: var(--green-background);
+    border-radius: 25px;
+    width: 250px;
+    margin: 0 auto;
+    margin-bottom: 35px;
+    padding: 10px 5px;
+    box-shadow: 0px 10px 25px -8px var(--green-shadow);
+    transition-property: color, background-color, box-shadow;
+    transition-duration: 300ms;
+}
+
+.tasks-list {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.todo-wrapper {
+    background-color: var(--wrappers-bg);
+    padding: 50px 0px;
+    margin: 50px 15px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 13px 0px var(--wrappers-shadow);
+    transition-property: color, background-color, box-shadow, height;
+    transition-duration: 300ms;
+}
+
+.theme-switcher-button {
+    margin-top: 10px;
+    background-color: var(--green-background);
+    border-radius: 15px;
+    padding: 10px 40px;
+    transition-property: color, background-color, box-shadow, transform;
+    transition-duration: 150ms;
+}
+
+.theme-switcher-button:hover {
+    transform: scale(0.9);
+}
+
+.theme-switcher-button:active {
+    transform: scale(0.8);
+}
+
+@media (max-width: 375px) {
+
+    .service-name {
+        font-size: 14px;
+        width: 200px;
+    }
+}
