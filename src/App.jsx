@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Form from './components/Form/Form'
 import InfroBar from './components/InformationBar/InfroBar'
 import Task from './components/Task/Task'
@@ -7,8 +7,15 @@ import './App.css'
 import ThemeIcon from './assets/BxsMoon.svg'
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const savedTodos = localStorage.getItem('todos');
+    return savedTodos ? JSON.parse(savedTodos) : [];
+  });
   const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
 
   function addTask(value) {
     if (value) {
@@ -20,7 +27,6 @@ function App() {
             text: value,
             done: false,
           }
-
         ]
       );
     } else {
@@ -34,6 +40,26 @@ function App() {
         ...todos.filter(todo => todo.id !== id)
       ]
     );
+
+    let storedItems = JSON.parse(localStorage.getItem('todos'));
+    const itemIndex = storedItems.findIndex(item => item.id === id);
+
+    if (itemIndex !== -1) {
+      // Переключаем значение done
+      storedItems[itemIndex].done = !storedItems[itemIndex].done;
+
+      // Если значение стало true, удаляем элемент из массива и LocalStorage
+      if (storedItems[itemIndex].done) {
+        storedItems.splice(itemIndex, 1); // Удаляем элемент из массива
+      }
+
+      // Обновляем LocalStorage с новым массивом
+      localStorage.setItem('todos', JSON.stringify(storedItems));
+
+      console.log(`Элемент с ID ${id} был обновлён. Текущее состояние:`, storedItems);
+    } else {
+      console.log(`Элемент с ID ${id} не найден.`);
+    }
   };
 
   function completeTask(id) {
