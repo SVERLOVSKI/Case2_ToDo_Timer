@@ -3,9 +3,18 @@ import './Timer.css'
 
 export default function Timer() {
     const [minutes, setMinutes] = useState(0);
-    const [seconds, setSeconds] = useState(0);
-    const [isActive, setIsActive] = useState(false);
-    const [isPaused, setIsPaused] = useState(false);
+    const [seconds, setSeconds] = useState(() => {
+        const savedSeconds = localStorage.getItem('seconds');
+        return savedSeconds ? JSON.parse(savedSeconds) : 0;
+      });
+    const [isActive, setIsActive] = useState(() => {
+        const savedisActive = localStorage.getItem('savedisActive');
+        return savedisActive ? JSON.parse(savedisActive) : false;
+      });
+    const [isPaused, setIsPaused] = useState(() => {
+        const savedisPaused = localStorage.getItem('savedisPaused');
+        return savedisPaused ? JSON.parse(savedisPaused) : false;
+      });
 
     useEffect(() => {
         let interval = null;
@@ -21,6 +30,22 @@ export default function Timer() {
 
         return () => clearInterval(interval);
     }, [isActive, seconds]);
+
+    // useEffect(() => {
+    //     localStorage.setItem('minutes', JSON.stringify(minutes));
+    // }, [minutes]);
+
+    useEffect(() => {
+        localStorage.setItem('seconds', JSON.stringify(seconds));
+    }, [seconds]);
+
+    useEffect(() => {
+        localStorage.setItem('savedisActive', JSON.stringify(isActive));
+    }, [isActive]);
+
+    useEffect(() => {
+        localStorage.setItem('savedisPaused', JSON.stringify(isPaused));
+    }, [isPaused]);
 
     const startTimer = () => {
         if (minutes > 0) {
@@ -77,7 +102,7 @@ export default function Timer() {
                 min="0"
             />
             <div className='buttons-wrapper'>
-                <button className={isActive || minutes <= 0 ? 'timer-button timer-button__disabled' : 'timer-button'} onClick={startTimer} disabled={isActive || minutes <= 0}>
+                <button className={isActive || minutes <= 0 || isPaused ? 'timer-button timer-button__disabled' : 'timer-button'} onClick={startTimer} disabled={isActive || minutes <= 0 || isPaused}>
                     Запустить
                 </button>
                 <button className={!isActive ? 'timer-button timer-button__disabled' : 'timer-button'} onClick={stopTimer} disabled={!isActive}>

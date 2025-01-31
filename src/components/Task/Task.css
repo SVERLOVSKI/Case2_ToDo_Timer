@@ -64,6 +64,14 @@
     transition-duration: 150ms;
 }
 
+.button_change-button img {
+    display: none;
+}
+
+.button_done-button img {
+    display: none;
+}
+
 @media (max-width: 768px) {
     .button {
         font-size: 12px;
@@ -85,5 +93,23 @@
 
     .button_change-button {
         margin-right: 0px;
+    }
+}
+
+@media (max-width: 320px) {
+    .button_change-button p {
+        display: none;
+    }
+
+    .button_done-button p {
+        display: none;
+    }
+
+    .button_change-button img {
+        display: inline;
+    }
+    
+    .button_done-button img {
+        display: inline;
     }
 }

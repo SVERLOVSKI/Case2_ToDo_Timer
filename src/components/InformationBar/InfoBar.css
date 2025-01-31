@@ -23,5 +23,6 @@
 @media (max-width: 425px) {
     .info-bar {
         width: 200px;
+        margin-bottom: 10px;
     }
 }
